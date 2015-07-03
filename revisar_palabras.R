@@ -5,13 +5,35 @@
 #Borrar variables del workspace
 rm(list = ls())
 
-#Declarar string
-st = "aaaaaaaaaaaaaaaaaaaaaaahaaaaaaaaaaaaaaaaaaaaaaaoaaaaaaaaaaaaaaaaaaaaaaaaaaaaalaaaaaaaaaaaaaaaaaaaaaaaa"
 
-#Partir el string en elementos, para comparar
-sts = strsplit(st,"")
-#Obtener la longitud del string
-stlngt = length(sts[[1]])
+
++readpuzzle=function(name){
++  #Esta función lee os datos del archivo de texto name donde se encuentran las letras
++  #y regresa una matriz con las letras 
++  sopa=read.table(name,sep = '')
++  numcol=as.numeric(as.character(sopa[1, "V1"]))
++  sopa1=sopa[2:numcol,1];
++  sopa1=as.character(sopa1)
++  sopa1=strsplit(sopa1,"")
++  sopa1=t(matrix(unlist(sopa1),100,100))
++  return(sopa1)
++}
++
++readwords=function(name){
++  #Esta función lee os datos del archivo de texto name donde se encuentran las letras
++  #y regresa una una lista con las palabras a buscar
++  sopa=read.table(name,sep = '')
++  numcol=as.numeric(as.character(sopa[1, "V1"]))
++  numwords=as.numeric(as.character(sopa[numcol+2, "V1"]))
++  inicio=numcol+2;
++  final=numcol+numwords+2
++  sopa2=sopa[inicio:final,1]
++  words=strsplit(as.character(sopa2),"")
++  return(words)
++}
++
++
+
 
 #Declarar la lista de palabras
 word_list = list("hola","adios")
